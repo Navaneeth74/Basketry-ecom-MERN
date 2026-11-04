@@ -1,54 +1,98 @@
 import React from 'react';
 
 const About = () => {
-  const containerStyle = {
-    maxWidth: '900px',
-    margin: '0 auto',
-    padding: '40px',
-    background: '#18181b',
-    borderRadius: '16px',
-    border: '1px solid rgba(255, 255, 255, 0.05)',
-    boxShadow: '0 10px 40px rgba(0,0,0,0.5)',
-    textAlign: 'center'
-  };
-
-  const socialBtnStyle = {
-    display: 'inline-block',
-    margin: '10px',
-    padding: '10px 20px',
-    background: '#27272a',
-    color: '#fff',
-    borderRadius: '8px',
-    textDecoration: 'none',
-    transition: 'all 0.3s ease',
-    border: '1px solid rgba(255, 255, 255, 0.1)'
-  };
-
   return (
-    <div style={containerStyle}>
-      <img
-        src="/dp.jpg"
-        alt="@theshivanshvasu"
-        style={{ width: '180px', height: '180px', borderRadius: '50%', objectFit: 'cover', border: '4px solid #f97316', marginBottom: '20px', boxShadow: '0 4px 20px rgba(249, 115, 22, 0.4)' }}
-      />
-      <h2 style={{ fontSize: '2.5rem', marginBottom: '10px', color: '#fff' }}>About Me</h2>
-      <h3 style={{ fontSize: '1.5rem', color: '#f97316', marginBottom: '15px' }}>Shivansh Vasu (@theshivanshvasu)</h3>
+    <div style={{ maxWidth: '960px', margin: '40px auto', padding: '0 20px 80px' }}>
+      {/* Hero Header */}
+      <section style={cardStyle}>
+        <span style={{
+          display: 'inline-block',
+          marginBottom: '12px',
+          color: '#f97316',
+          fontSize: '0.8rem',
+          fontWeight: 700,
+          letterSpacing: '0.14em',
+          textTransform: 'uppercase'
+        }}>
+          Web Technology • Course Project
+        </span>
+        <h1 style={{
+          margin: '0 0 16px',
+          color: '#fff',
+          fontSize: 'clamp(2.2rem, 5vw, 3.2rem)',
+          fontWeight: 800,
+          letterSpacing: '-0.04em'
+        }}>
+          Basketry E-Commerce & Order Management System
+        </h1>
+        <p style={{
+          color: '#d4d4d8',
+          fontSize: '1.15rem',
+          lineHeight: 1.7,
+          margin: '0 0 24px'
+        }}>
+          Engineered & Developed by <strong>Navaneeth S</strong>. Designed to meet modern enterprise retail specifications for centralising product catalogs, processing secure payments, tracking warehouse-to-doorstep fulfillment, and generating automated business analytics.
+        </p>
 
-      <p style={{ color: '#a1a1aa', fontSize: '1.2rem', lineHeight: '1.8', maxWidth: '600px', margin: '0 auto 30px auto' }}>
-        <strong>Join the community and grow together!</strong> Welcome to my platform where we build, deploy, and scale highly engineered systems.
-      </p>
+        <div style={{
+          display: 'flex',
+          gap: '16px',
+          flexWrap: 'wrap',
+          borderTop: '1px solid rgba(255,255,255,0.08)',
+          paddingTop: '20px'
+        }}>
+          <div>
+            <span style={{ color: '#71717a', fontSize: '0.8rem', textTransform: 'uppercase' }}>Lead Developer</span>
+            <p style={{ margin: '2px 0 0', color: '#fff', fontWeight: 700 }}>Navaneeth S</p>
+          </div>
+          <div style={{ marginLeft: 'clamp(10px, 3vw, 40px)' }}>
+            <span style={{ color: '#71717a', fontSize: '0.8rem', textTransform: 'uppercase' }}>System Architecture</span>
+            <p style={{ margin: '2px 0 0', color: '#fff', fontWeight: 700 }}>MERN Stack (MongoDB, Express, React, Node.js)</p>
+          </div>
+          <div style={{ marginLeft: 'clamp(10px, 3vw, 40px)' }}>
+            <span style={{ color: '#71717a', fontSize: '0.8rem', textTransform: 'uppercase' }}>Market Target</span>
+            <p style={{ margin: '2px 0 0', color: '#10b981', fontWeight: 700 }}>2026 Enterprise Ready</p>
+          </div>
+        </div>
+      </section>
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '10px', marginTop: '20px' }}>
-        <a href="https://theshivanshvasu.com" target="_blank" rel="noreferrer" style={socialBtnStyle}>🌐 Website</a>
-        <a href="https://youtube.com/@shivanshvasu" target="_blank" rel="noreferrer" style={{ ...socialBtnStyle, background: 'rgba(239, 68, 68, 0.2)', borderColor: '#ef4444', color: '#ef4444' }}>📺 YouTube</a>
-        <a href="https://instagram.com/theshivanshvasuofficial" target="_blank" rel="noreferrer" style={{ ...socialBtnStyle, background: 'rgba(236, 72, 153, 0.2)', borderColor: '#ec4899', color: '#ec4899' }}>📸 Instagram</a>
-        <a href="https://www.linkedin.com/in/theshivanshvasu" target="_blank" rel="noreferrer" style={{ ...socialBtnStyle, background: 'rgba(59, 130, 246, 0.2)', borderColor: '#3b82f6', color: '#3b82f6' }}>💼 LinkedIn</a>
-        <a href="https://x.com/theshivanshvasu" target="_blank" rel="noreferrer" style={socialBtnStyle}>✖️ X (Twitter)</a>
-        <a href="https://whatsapp.com/channel/0029VbAWGE5ICVfcjjKTAS0B" target="_blank" rel="noreferrer" style={{ ...socialBtnStyle, background: 'rgba(16, 185, 129, 0.2)', borderColor: '#10b981', color: '#10b981' }}>💬 WhatsApp</a>
-        <a href="https://linktr.ee/shivanshvasu" target="_blank" rel="noreferrer" style={socialBtnStyle}>🔗 Linktree</a>
+      {/* Developer Card */}
+      <div style={{
+        marginTop: '40px',
+        padding: '30px',
+        background: '#09090b',
+        borderRadius: '16px',
+        border: '1px solid #27272a',
+        textAlign: 'center'
+      }}>
+        <h3 style={{ margin: '0 0 8px', color: '#fff', fontSize: '1.3rem' }}>
+          Developed by Navaneeth S
+        </h3>
+        <p style={{ color: '#a1a1aa', margin: '0 0 16px', fontSize: '0.95rem' }}>
+          Basketry • Web Technology E-Commerce Admin & Order Management System
+        </p>
+        <span style={{
+          display: 'inline-block',
+          background: 'rgba(249, 115, 22, 0.1)',
+          color: '#f97316',
+          padding: '6px 16px',
+          borderRadius: '20px',
+          fontSize: '0.85rem',
+          fontWeight: 700
+        }}>
+          MongoDB • Express • React • Node.js • Third-Party APIs
+        </span>
       </div>
     </div>
   );
+};
+
+const cardStyle = {
+  padding: 'clamp(28px, 6vw, 48px)',
+  background: '#18181b',
+  borderRadius: '20px',
+  border: '1px solid rgba(255, 255, 255, 0.08)',
+  boxShadow: '0 18px 50px rgba(0,0,0,0.3)'
 };
 
 export default About;

@@ -1,7 +1,7 @@
 {
   "info": {
     "_postman_id": "2457ef87-a7a7-401c-a6cf-94d3402bc0d8",
-    "name": "ShopNest - MERN",
+    "name": "Basketry - MERN",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "27830807"
   },
@@ -33,7 +33,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"name\":\"Shivansh\",\r\n    \"email\": \"user@gmail.com\",\r\n    \"password\": \"pass123\"\r\n}",
+              "raw": "{\r\n    \"name\":\"Navaneeth S\",\r\n    \"email\": \"user@gmail.com\",\r\n    \"password\": \"pass123\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -148,7 +148,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"name\":\"Shivansh\",\r\n    \"email\": \"user@gmail.com\",\r\n    \"password\": \"pass123\"\r\n}"
+              "raw": "{\r\n    \"name\":\"Navaneeth S\",\r\n    \"email\": \"user@gmail.com\",\r\n    \"password\": \"pass123\"\r\n}"
             },
             "url": {
               "raw": "{{endpoint}}/api/products/",
@@ -184,7 +184,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"name\":\"Shivansh\",\r\n    \"email\": \"user@gmail.com\",\r\n    \"password\": \"pass123\"\r\n}"
+              "raw": "{\r\n    \"name\":\"Navaneeth S\",\r\n    \"email\": \"user@gmail.com\",\r\n    \"password\": \"pass123\"\r\n}"
             },
             "url": {
               "raw": "{{endpoint}}/api/products/69e88d27e51103fdd44cb50c",
@@ -383,6 +383,41 @@
               ]
             },
             "description": "Generated from cURL: curl --location --request PUT 'http://localhost:5000/api/products/PRODUCT_ID' \\\n--header 'Authorization: Bearer YOUR_TOKEN_HERE' \\\n--form 'name=\"Updated Product Name\"' \\\n--form 'description=\"Updated Description\"' \\\n--form 'price=\"149.99\"' \\\n--form 'category=\"Electronics\"' \\\n--form 'stock=\"100\"' \\\n--form 'image=@\"/path/to/image.jpg\"'"
+          },
+          "response": []
+        },
+        {
+          "name": "Quick Update Stock Level (Inventory Health)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"delta\": 5\n}"
+            },
+            "url": {
+              "raw": "{{endpoint}}/api/products/{{product_id}}/stock",
+              "host": [
+                "{{endpoint}}"
+              ],
+              "path": [
+                "api",
+                "products",
+                "{{product_id}}",
+                "stock"
+              ]
+            }
           },
           "response": []
         }
@@ -595,6 +630,60 @@
             "description": "Generated from cURL: curl --location 'http://localhost:5000/api/orders' \\\n--header 'Authorization: Bearer YOUR_TOKEN_HERE' \\\n--header 'Content-Type: application/json' \\\n--data '{\n  \"items\": [\n    {\n      \"productId\": \"PRODUCT_ID_1\",\n      \"quantity\": 2,\n      \"price\": 50.00\n    },\n    {\n      \"productId\": \"PRODUCT_ID_2\",\n      \"quantity\": 1,\n      \"price\": 75.00\n    }\n  ],\n  \"totalAmount\": 175.00,\n  \"address\": \"123 Main Street, City, Country, 12345\",\n  \"paymentId\": \"PAYMENT_ID_12345\"\n}'"
           },
           "response": []
+        },
+        {
+          "name": "Public Track Order by ID or Tracking #",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{endpoint}}/api/orders/track/BSK-TRK-782194",
+              "host": [
+                "{{endpoint}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "track",
+                "BSK-TRK-782194"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Instant MNC Sandbox Checkout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"items\": [\n    {\n      \"productId\": \"6627694f451fbc102ad993ea\",\n      \"qty\": 1\n    }\n  ],\n  \"address\": {\n    \"fullName\": \"Navaneeth S\",\n    \"street\": \"MG Road\",\n    \"city\": \"Bangalore\",\n    \"postalCode\": \"560001\",\n    \"country\": \"India\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{endpoint}}/api/payment/sandbox-checkout",
+              "host": [
+                "{{endpoint}}"
+              ],
+              "path": [
+                "api",
+                "payment",
+                "sandbox-checkout"
+              ]
+            }
+          },
+          "response": []
         }
       ]
     },
@@ -651,6 +740,115 @@
               ]
             },
             "description": "Generated from cURL: curl --location 'http://localhost:5000/api/orders' \\\n--header 'Authorization: Bearer YOUR_TOKEN_HERE' \\\n--header 'Content-Type: application/json' \\\n--data '{\n  \"items\": [\n    {\n      \"productId\": \"PRODUCT_ID_1\",\n      \"quantity\": 2,\n      \"price\": 50.00\n    },\n    {\n      \"productId\": \"PRODUCT_ID_2\",\n      \"quantity\": 1,\n      \"price\": 75.00\n    }\n  ],\n  \"totalAmount\": 175.00,\n  \"address\": \"123 Main Street, City, Country, 12345\",\n  \"paymentId\": \"PAYMENT_ID_12345\"\n}'"
+          },
+          "response": []
+        },
+        {
+          "name": "Export MNC Sales Report to CSV",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{endpoint}}/api/analytics/export-csv",
+              "host": [
+                "{{endpoint}}"
+              ],
+              "path": [
+                "api",
+                "analytics",
+                "export-csv"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "THIRD_PARTY_APIS",
+      "item": [
+        {
+          "name": "Fetch Supplier Catalog Feed (dummyjson.com API)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{endpoint}}/api/external/supplier-catalog",
+              "host": [
+                "{{endpoint}}"
+              ],
+              "path": [
+                "api",
+                "external",
+                "supplier-catalog"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Import Supplier Product to Basketry Catalog",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Handcrafted Nordic Woven Basket\",\n  \"description\": \"Organic cane basket imported from supplier feed\",\n  \"price\": 1899,\n  \"category\": \"Home Decor\",\n  \"stock\": 35,\n  \"brand\": \"Nordic Craftworks\",\n  \"externalId\": \"EXT-SUP-101\"\n}"
+            },
+            "url": {
+              "raw": "{{endpoint}}/api/external/import-product",
+              "host": [
+                "{{endpoint}}"
+              ],
+              "path": [
+                "api",
+                "external",
+                "import-product"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Track Courier Logistics Telemetry",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{endpoint}}/api/external/track-courier/BSK-TRK-782194",
+              "host": [
+                "{{endpoint}}"
+              ],
+              "path": [
+                "api",
+                "external",
+                "track-courier",
+                "BSK-TRK-782194"
+              ]
+            }
           },
           "response": []
         }

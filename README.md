@@ -1,76 +1,50 @@
 <div align="center">
-  <img src="https://cdn-icons-png.flaticon.com/512/3514/3514491.png" alt="ShopNest Logo" width="80" />
-  <h1>ShopNest - Full-Stack MERN E-Commerce App</h1>
-  <p>A professionally engineered, full-stack E-commerce platform built strictly using modern standard React (CRA) on the frontend and Express/MongoDB on the backend.</p>
+  <img src="https://cdn-icons-png.flaticon.com/512/3514/3514491.png" alt="Basketry Logo" width="80" />
+  <h1>Basketry - E-Commerce Admin & Order Management System</h1>
+  <p><strong>Course: Web Technology • Lead Developer & System Architect: Navaneeth S</strong></p>
+  <p>A high-performance, enterprise-grade full-stack MERN retail and order fulfillment platform with INR-only pricing, real-time delivery tracking, third-party API synchronization, and automated business data visualization.</p>
 </div>
+
+---
+
+## 👨‍💻 Project & Developer Details
+
+- **Project Name:** Basketry
+- **Developer / Author:** Navaneeth S
+- **Subject / Domain:** Web Technology — E-Commerce Admin & Order Management System
+- **Year / Market Standard:** 2026 Enterprise Retail Ready
+
+---
+
+## 🎯 Syllabus Objectives & Implementation Matrix
+
+| Syllabus Objective | Basketry Enterprise Implementation |
+| :--- | :--- |
+| **1. Manage Products, Categories & Inventory** | Centralised product catalog with SKU codes, category filtering, brand classification, real-time stock deductions on checkout, low-stock alerts, and quick inline stock replenishment (+5 / -1) in Admin. |
+| **2. Process Customer Orders & Payments** | Dual checkout workflows: **Razorpay Payment Gateway** (HMAC-SHA256 signature verification) and **Instant MNC Sandbox Gateway** (for instant automated testing/grading without ad-blocker popups). Atomic inventory reservations with rollback safety. |
+| **3. Track Order Status & Delivery** | End-to-end journey from warehouse shelf to customer doorstep across 6 fulfillment stages: `Placed → Confirmed → Processing → Shipped → Out for Delivery → Delivered`. Interactive public tracker (`/track/:orderId`), carrier metadata, GPS dispatch hubs, and full operator audit history. |
+| **4. Sales & Performance Reports** | Automated SVG sales trend charts, order pipeline status distribution, category revenue breakdown, top products leaderboard, and 1-click **Export Sales Report to CSV** for corporate MNC audits. |
+| **5. Real-World E-Commerce Workflows** | INR-only pricing, tax invoices (`InvoiceModal`), operator audit trails with ISO timestamps, and supplier partner synchronization. |
 
 ---
 
 ## 🛠 Tech Stack Details
 
-- **Frontend:** Pure React.js (`react-scripts`), Redux Toolkit (for Cart state management), AuthContext API (for JWT user sessions).
-- **Backend:** Node.js, Express.js architecture mapped with middleware-based routing.
-- **Database:** MongoDB (via Mongoose schemas).
-- **Features:** Unified Admin Dashboard, Direct Cloudinary Content Maps, Personal User Profiles matching mapped Order Histories.
-- **Payments:** Razorpay fully implemented (utilize your test metrics or placeholder).
-- **Cloud Storage:** Cloudinary integration for Product image uploading securely via Multer.
+- **Frontend:** Pure React.js (`react-scripts`), Redux Toolkit (Cart state management), React Router DOM v6, AuthContext API (JWT user sessions), CurrencyContext (INR price formatting).
+- **Backend:** Node.js, Express.js architecture mapped with modular MVC controllers and middleware.
+- **Database:** MongoDB (via Mongoose schemas with indexed SKUs, relational user references, and order status timelines).
+- **Third-Party APIs:** DummyJSON Supplier Catalog API, Razorpay Payment Gateway, Cloudinary Image Storage API.
+- **Automated Reporting:** Native SVG responsive data visualizations and RFC 4180 compliant CSV transaction streaming.
 
----
 
-## 🚀 Quick Start / Local Development Guide
 
-The workspace is configured beautifully using a monorepo-friendly setup with `concurrently`, enabling you to start everything from the very root folder.
-
-### 1️⃣ Dependencies & Environments
-Make sure you have MongoDB running locally, or map it to a remote database string.
-
-Inside the `backend/` folder, ensure your `.env` looks like this:
-```env
-PORT=5000
-NODE_ENV=development
-MONGO_URI=mongodb://127.0.0.1:27017/shopnest
-JWT_SECRET=super_secret_key
-RAZORPAY_KEY_ID=your_key_id
-RAZORPAY_KEY_SECRET=your_key_secret
-```
-
-From the **root folder** `shopnest/`, trigger a full install across environments:
-```bash
-npm run build
-```
-
-### 2️⃣ Populate the Database (Seeding)
-Test the platform rapidly featuring beautiful dummy products (Unsplash) and automatic `Admin` role provisioning:
-```bash
-npm run seed
-```
-> **Seed Admin Access:** Email: `admin@shopnest.com` | Password: `password123`
-
-### 3️⃣ Run Servers Start
-Run this single command at the root to bind the Backend (Port 5000) and Frontend (Port 3000) natively:
+### 3️⃣ Run Servers
+Run this single command at the project root to start both Backend (Port 5000) and Frontend (Port 3000):
 ```bash
 npm run dev
 ```
 
----
-
-## ☁️ 1-Click Deployment (Render Free-Tier Optimized)
-
-The server codebase features a seamless fallback mechanic leveraging Node `process.env.NODE_ENV === "production"`. When deployed to Render as a singular instance, the Express backend hosts and correctly resolves static routes to `/frontend/build` rendering the whole platform completely free on 1 Node server.
-
-1. Publish this repo onto **GitHub**.
-2. Go to [Render Dashboard](https://dashboard.render.com).
-3. Connect Repo -> Create a **Web Service**.
-4. Configure Build Command:
-   `npm run render-build` 
-   *(This cleanly installs API + UI node_modules then generates `react-scripts build`)*
-5. Configure Start Command:
-   `npm start`
-6. Open **Advanced > Environment Variables** and map your `.env` fields heavily defining `NODE_ENV = production`.
-7. Hit **Deploy**. The robust path resolving inside `/backend/server.js` hosts it fluidly!
-
----
-
-## 📄 Postman Documentations
-This repository includes a fully-scaffolded API testing toolkit: **`ShopNest_Postman_Collection.json`**. 
-Simply Import this file directly into the local Postman IDE. It features variables like `{{token}}` properly mapped to effortlessly check protected admin/user/order payloads. Happy coding!
+<div align="center">
+  <p><strong>Basketry • Web Technology Course Project</strong></p>
+  <p>Designed, Engineered & Documented by <strong>Navaneeth S</strong> © 2026</p>
+</div>

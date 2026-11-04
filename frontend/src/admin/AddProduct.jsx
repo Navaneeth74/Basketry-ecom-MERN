@@ -7,10 +7,19 @@ const AddProduct = () => {
   const navigate = useNavigate();
   
   const [formData, setFormData] = useState({
-    name: '', description: '', price: '', category: '', stock: ''
+    name: '',
+    description: '',
+    price: '',
+    category: 'Electronics',
+    stock: '',
+    sku: '',
+    brand: 'Basketry Studio',
+    lowStockThreshold: '5',
+    imageUrl: ''
   });
-  const [image, setImage] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   if (!user || user.role !== 'admin') {
     navigate('/');
@@ -19,16 +28,24 @@ const AddProduct = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!image) return alert('Please select an image');
+    if (!imageFile && !formData.imageUrl) {
+      setError('Please provide an image file or image URL');
+      return;
+    }
     
     setLoading(true);
+    setError('');
     const data = new FormData();
     data.append('name', formData.name);
     data.append('description', formData.description);
     data.append('price', formData.price);
     data.append('category', formData.category);
     data.append('stock', formData.stock);
-    data.append('image', image);
+    if (formData.sku) data.append('sku', formData.sku);
+    data.append('brand', formData.brand);
+    data.append('lowStockThreshold', formData.lowStockThreshold);
+    if (formData.imageUrl) data.append('imageUrl', formData.imageUrl);
+    if (imageFile) data.append('image', imageFile);
 
     try {
       const res = await fetch('/api/products', {
@@ -39,59 +56,108 @@ const AddProduct = () => {
       const responseData = await res.json();
       
       if (res.ok) {
-        alert('Product created successfully with Cloudinary Image URL!');
-        navigate('/shop');
+        navigate('/admin/products');
       } else {
-        alert(responseData.message || 'Error creating product');
+        setError(responseData.message || 'Error creating product');
       }
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      setError(err.message);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div style={{ maxWidth: '600px', margin: '40px auto', background: '#18181b', padding: '40px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
-      <h2 style={{ color: '#f97316', marginBottom: '20px' }}>Add New Product</h2>
-      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+    <div style={{ maxWidth: '640px', margin: '40px auto', background: '#18181b', padding: '36px', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.06)' }}>
+      <span style={{ color: '#f97316', fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+        Inventory Admin
+      </span>
+      <h2 style={{ color: '#fff', fontSize: '1.8rem', margin: '4px 0 20px', fontWeight: 800 }}>Add New Catalog Product</h2>
+
+      {error && <div style={{ padding: '10px 14px', background: 'rgba(239,68,68,0.15)', color: '#ef4444', borderRadius: '8px', marginBottom: '16px', fontSize: '0.88rem' }}>{error}</div>}
+
+      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
         <input 
           type="text" placeholder="Product Name" required 
+          value={formData.name}
           onChange={(e) => setFormData({...formData, name: e.target.value})} 
           style={inputStyle} 
         />
         <textarea 
-          placeholder="Description" required rows="4"
+          placeholder="Detailed Product Description" required rows="3"
+          value={formData.description}
           onChange={(e) => setFormData({...formData, description: e.target.value})} 
           style={inputStyle} 
         />
-        <input 
-          type="number" placeholder="Price" required 
-          onChange={(e) => setFormData({...formData, price: e.target.value})} 
-          style={inputStyle} 
-        />
-        <input 
-          type="text" placeholder="Category" required 
-          onChange={(e) => setFormData({...formData, category: e.target.value})} 
-          style={inputStyle} 
-        />
-        <input 
-          type="number" placeholder="Stock Quantity" required 
-          onChange={(e) => setFormData({...formData, stock: e.target.value})} 
-          style={inputStyle} 
-        />
-        
-        <div style={{ padding: '15px', border: '1px dashed #f97316', borderRadius: '8px' }}>
-          <label style={{ display: 'block', marginBottom: '10px', color: '#a1a1aa' }}>Upload Product Image (Cloudinary)</label>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
           <input 
-            type="file" accept="image/*" required 
-            onChange={(e) => setImage(e.target.files[0])} 
-            style={{ color: '#fff' }}
+            type="number" step="0.01" placeholder="Price (INR)" required 
+            value={formData.price}
+            onChange={(e) => setFormData({...formData, price: e.target.value})} 
+            style={inputStyle} 
+          />
+          <input 
+            type="number" placeholder="Initial Stock Quantity" required 
+            value={formData.stock}
+            onChange={(e) => setFormData({...formData, stock: e.target.value})} 
+            style={inputStyle} 
           />
         </div>
 
-        <button type="submit" disabled={loading} className="btn" style={{ marginTop: '10px' }}>
-          {loading ? 'Uploading & Creating...' : 'Publish Product'}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+          <select
+            value={formData.category}
+            onChange={(e) => setFormData({...formData, category: e.target.value})}
+            style={inputStyle}
+          >
+            <option value="Electronics">Electronics</option>
+            <option value="Furniture">Furniture</option>
+            <option value="Clothing">Clothing</option>
+            <option value="Home Decor">Home Decor</option>
+            <option value="Kitchenware">Kitchenware</option>
+            <option value="Artisanal Crafts">Artisanal Crafts</option>
+          </select>
+          <input 
+            type="text" placeholder="Brand / Maker" 
+            value={formData.brand}
+            onChange={(e) => setFormData({...formData, brand: e.target.value})} 
+            style={inputStyle} 
+          />
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+          <input 
+            type="text" placeholder="SKU (e.g. BSK-ELEC-01)" 
+            value={formData.sku}
+            onChange={(e) => setFormData({...formData, sku: e.target.value})} 
+            style={inputStyle} 
+          />
+          <input 
+            type="number" placeholder="Low Stock Threshold (Def: 5)" 
+            value={formData.lowStockThreshold}
+            onChange={(e) => setFormData({...formData, lowStockThreshold: e.target.value})} 
+            style={inputStyle} 
+          />
+        </div>
+
+        <input 
+          type="url" placeholder="Direct Image URL (e.g. Unsplash URL)" 
+          value={formData.imageUrl}
+          onChange={(e) => setFormData({...formData, imageUrl: e.target.value})} 
+          style={inputStyle} 
+        />
+        
+        <div style={{ padding: '16px', border: '1px dashed #3f3f46', borderRadius: '8px', background: '#09090b' }}>
+          <label style={{ display: 'block', marginBottom: '8px', color: '#a1a1aa', fontSize: '0.85rem' }}>Or Upload File (Cloudinary)</label>
+          <input 
+            type="file" accept="image/*" 
+            onChange={(e) => setImageFile(e.target.files[0])} 
+            style={{ color: '#fff', fontSize: '0.85rem' }}
+          />
+        </div>
+
+        <button type="submit" disabled={loading} className="btn" style={{ marginTop: '8px', padding: '14px', fontSize: '1rem', fontWeight: 700 }}>
+          {loading ? 'Publishing to Central Catalog...' : 'Publish Product to Catalog'}
         </button>
       </form>
     </div>
@@ -102,9 +168,9 @@ const inputStyle = {
   padding: '12px',
   background: '#09090b',
   border: '1px solid #27272a',
-  borderRadius: '6px',
+  borderRadius: '8px',
   color: '#fff',
-  fontSize: '15px',
+  fontSize: '14px',
   outline: 'none'
 };
 
